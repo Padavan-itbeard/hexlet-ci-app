@@ -9,7 +9,7 @@ jobs:
       - name: Run Snyk to check for vulnerabilities
         uses: snyk/actions/node@master
         env:
-          SNYK_TOKEN: 8388f498-6abf-4720-9894-8ff283891fea
+          SNYK_TOKEN: cdb5b4bf-97e8-4c7b-91e0-f3e9d21ee892
   build:
     # операционная система для работы воркфлоу
     runs-on: ubuntu-latest
