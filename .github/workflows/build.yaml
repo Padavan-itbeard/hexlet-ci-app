@@ -2,9 +2,14 @@ name: build
 # on – определяет события, которые запускают воркфлоу
 on: push
 jobs:
-  # build – произвольно выбранное имя задания
-  # их может быть больше одного
-
+  security:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - name: Run Snyk to check for vulnerabilities
+        uses: snyk/actions/node@master
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
   build:
     # операционная система для работы воркфлоу
     runs-on: ubuntu-latest
@@ -13,6 +18,9 @@ jobs:
       # checkout — клонирует репозиторий
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
+        with:
+          node-version: "18.x"
+          cache: "npm"
       # run – произвольная bash-команда
       - run: make setup
       - run: make test
